@@ -1,4 +1,12 @@
+local ncpu = #vim.loop.cpu_info();
+
 return {
+	{
+		"Civitasv/cmake-tools.nvim",
+		opts={
+			cmake_build_options={"-j" .. tostring(ncpu)},
+		}
+	},
 	{
 		"nvim-treesitter/nvim-treesitter",
 		opts = { ensure_installed = { "cpp" } },
