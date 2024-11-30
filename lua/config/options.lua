@@ -7,6 +7,8 @@ opt.autochdir = true
 opt.expandtab = false
 opt.shiftwidth = 4
 opt.tabstop = 4
-opt.fileencodings={"ucs-bom","utf-8","cp936","gbk","latin1","utf-16"}
+opt.fileencodings = { "ucs-bom", "utf-8", "cp936", "gbk", "latin1", "utf-16" }
 opt.relativenumber = false
 opt.termguicolors = true
+
+vim.o.clipboard = "unnamedplus"
