@@ -5,14 +5,10 @@
 vim.keymap.del({ "v", "n" }, "s")
 -- vim.keymap.del("n","<leader>S")
 
-vim.keymap.set("n", "<leader>m", "<cmd><leader>ss<CR>", { desc = "find doc symbols" })
+-- vim.keymap.set("n", "<leader>mm", "<leader>ss", { desc = "find doc symbols" })
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>O", builtin.git_files, { desc = "find file in git" })
 vim.keymap.set("n", "<leader>S", builtin.lsp_dynamic_workspace_symbols, { desc = "find symbols in git" })
 
-local function cmakeBuildAll()
-  require("cmake-tools").build({ target = "all" })
-end
-
--- vim.keymap.set("n","<leader>mb",cmakeBuildAll,{desc = "cmake build file"})
-vim.keymap.set("n", "<leader>mb", "<CMD>CMakeBuildCurrentFile<CR>", { desc = "cmake build file" })
+vim.keymap.set("n", "<leader>mbc", "<CMD>CMakeBuildCurrentFile<CR>", { desc = "cmake build cur file" })
+vim.keymap.set("n", "<leader>mbb", "<CMD>CMakeBuild<CR>", { desc = "cmake build file" })
