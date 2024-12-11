@@ -4,4 +4,8 @@ Language: Cpp
 ColumnLimit: 120
 SortIncludes: Never
 UseTab: Always
+TabWidth: 4
 BreakBeforeBraces: Mozilla
+IndentAccessModifiers: false
+AccessModifierOffset: -4
+AllowShortIfStatementsOnASingleLine: Never
