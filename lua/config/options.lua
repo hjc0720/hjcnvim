@@ -11,5 +11,7 @@ opt.fileencodings = { "ucs-bom", "utf-8", "cp936", "gbk", "latin1", "utf-16" }
 opt.relativenumber = false
 opt.termguicolors = true
 opt.textwidth = 120
+opt.formatoptions:append("t")
+opt.formatoptions:remove("l")
 
 vim.o.clipboard = "unnamedplus"
