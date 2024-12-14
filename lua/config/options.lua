@@ -15,3 +15,10 @@ opt.formatoptions:append("t")
 opt.formatoptions:remove("l")
 
 vim.o.clipboard = "unnamedplus"
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = "*",
+	callback = function(args)
+		require("conform").format({ bufnr = args.buf })
+	end,
+})
