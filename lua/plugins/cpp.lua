@@ -80,13 +80,13 @@ return {
 		"mfussenegger/nvim-dap",
 		event = "VeryLazy",
 		keys = {
-      -- add a keymap to browshttps://github.com/cmu-db/bustub.gite plhttps://github.com/cmu-db/bustub.gitugin files
-      -- stylua: ignore
-      {
-        "<F5>",
-        function() require("dap").continue() end,
-        desc = "launch/continue gdb",
-      },
+			-- add a keymap to browshttps://github.com/cmu-db/bustub.gite plhttps://github.com/cmu-db/bustub.gitugin files
+			-- stylua: ignore
+			{
+				"<F5>",
+				function() require("dap").continue() end,
+				desc = "launch/continue gdb",
+			},
 			{
 				"<F10>",
 				function()
