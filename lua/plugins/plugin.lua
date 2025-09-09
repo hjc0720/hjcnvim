@@ -33,4 +33,11 @@ return {
 			})
 		end,
 	},
+	{
+		"iamcco/markdown-preview.nvim",
+		init = function()
+			vim.g.mkdp_theme = "light"
+			vim.g.mkdp_debug = 1
+		end,
+	},
 }
