@@ -8,74 +8,70 @@ return {
 		},
 	},
 	{
-		"nvim-treesitter/nvim-treesitter",
-		opts = { ensure_installed = { "cpp" } },
-	},
-	{
 		"nvim-cmp",
 		opts = function(_, opts)
 			table.insert(opts.sorting.comparators, 1, require("clangd_extensions.cmp_scores"))
 		end,
 	},
-	{
-		"neovim/nvim-lspconfig",
-		opts = {
-			servers = {
-				-- Ensure mason installs the server
-				clangd = {
-					keys = {
-						{ "<leader>o", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
-					},
-					root_dir = function(fname)
-						return require("lspconfig.util").root_pattern(
-							"Makefile",
-							"configure.ac",
-							"configure.in",
-							"config.h.in",
-							"meson.build",
-							"meson_options.txt",
-							"build.ninja"
-						)(fname) or require("lspconfig.util").root_pattern(
-							"compile_commands.json",
-							"compile_flags.txt"
-						)(fname) or require("lspconfig.util").find_git_ancestor(fname)
-					end,
-					capabilities = {
-						offsetEncoding = { "utf-16" },
-					},
-					cmd = {
-						"clangd",
-						"--background-index",
-						"--clang-tidy",
-						"--header-insertion=iwyu",
-						"--completion-style=detailed",
-						"--function-arg-placeholders",
-						"--fallback-style=llvm",
-					},
-					init_options = {
-						usePlaceholders = true,
-						completeUnimported = true,
-						clangdFileStatus = true,
-					},
-				},
-			},
-			setup = {
-				clangd = function(_, opts)
-					local clangd_ext_opts = LazyVim.opts("clangd_extensions.nvim")
-					require("clangd_extensions").setup(
-						vim.tbl_deep_extend("force", clangd_ext_opts or {}, { server = opts })
-					)
-					return false
-				end,
-				on_new_config = function(new_config, new_cmd)
-					local status, cmake = pcall(require, "cmake-tools")
-					if status then
-						cmake.clangd_on_new_config(new_config)
-					end
-				end,
-			},
-		},
-	},
+	-- {
+	-- 	"neovim/nvim-lspconfig",
+	-- 	opts = {
+	-- 		servers = {
+	-- 			-- Ensure mason installs the server
+	-- 			clangd = {
+	-- 				keys = {
+	-- 					{ "<leader>o", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
+	-- 				},
+	-- 				root_dir = function(fname)
+	-- 					return require("lspconfig.util").root_pattern(
+	-- 						"Makefile",
+	-- 						"configure.ac",
+	-- 						"configure.in",
+	-- 						"config.h.in",
+	-- 						"meson.build",
+	-- 						"meson_options.txt",
+	-- 						"build.ninja"
+	-- 					)(fname) or require("lspconfig.util").root_pattern(
+	-- 						"compile_commands.json",
+	-- 						"compile_flags.txt"
+	-- 					)(fname) or require("lspconfig.util").find_git_ancestor(fname)
+	-- 				end,
+	-- 				capabilities = {
+	-- 					offsetEncoding = { "utf-16" },
+	-- 				},
+	-- 				cmd = {
+	-- 					"clangd",
+	-- 					"--background-index",
+	-- 					"--clang-tidy",
+	-- 					"--header-insertion=iwyu",
+	-- 					"--completion-style=detailed",
+	-- 					"--function-arg-placeholders",
+	-- 					"--fallback-style=llvm",
+	-- 				},
+	-- 				init_options = {
+	-- 					usePlaceholders = true,
+	-- 					completeUnimported = true,
+	-- 					clangdFileStatus = true,
+	-- 				},
+	-- 			},
+	-- 		},
+	-- 		setup = {
+	-- 			clangd = function(_, opts)
+	-- 				local clangd_ext_opts = LazyVim.opts("clangd_extensions.nvim")
+	-- 				require("clangd_extensions").setup(
+	-- 					vim.tbl_deep_extend("force", clangd_ext_opts or {}, { server = opts })
+	-- 				)
+	-- 				return false
+	-- 			end,
+	-- 			on_new_config = function(new_config, new_cmd)
+	-- 				local status, cmake = pcall(require, "cmake-tools")
+	-- 				if status then
+	-- 					cmake.clangd_on_new_config(new_config)
+	-- 				end
+	-- 			end,
+	-- 		},
+	-- 	},
+	-- },
 	{
 		"mfussenegger/nvim-dap",
 		event = "VeryLazy",
@@ -114,50 +110,6 @@ return {
 					require("dap").terminate()
 				end,
 				desc = "终止程序",
-			},
-		},
-	},
-	{
-		"Badhi/nvim-treesitter-cpp-tools",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		event = "VeryLazy",
-		-- Optional: Configuration
-		opts = function()
-			local options = {
-				preview = {
-					quit = "q", -- optional keymapping for quit preview
-					accept = "<tab>", -- optional keymapping for accept preview
-				},
-				header_extension = "h", -- optional
-				source_extension = "cpp", -- optional
-				custom_define_class_function_commands = { -- optional
-					TSCppImplWrite = {
-						output_handle = require("nt-cpp-tools.output_handlers").get_add_to_cpp(),
-					},
-					--[[
-                <your impl function custom command name> = {
-                    output_handle = function (str, context) 
-                        -- string contains the class implementation
-                        -- do whatever you want to do with it
-                    end
-                }
-                ]]
-				},
-			}
-			return options
-		end,
-		-- End configuration
-		config = true,
-		keys = {
-			{
-				"<leader>cdf",
-				"<CMD>TSCppDefineClassFunc<CR>",
-				desc = "create function define",
-			},
-			{
-				"<leader>cdv",
-				"<CMD>TSCppMakeConcreteClass<CR>",
-				desc = "create virtual function define",
 			},
 		},
 	},
