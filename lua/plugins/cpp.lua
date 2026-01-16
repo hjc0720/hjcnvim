@@ -7,6 +7,15 @@ return {
 			cmake_build_options = { "-j" .. tostring(ncpu) },
 		},
 	},
+	{
+		"neovim/nvim-lspconfig",
+		opts = {
+			servers = {
+				cmd = { "clangd", "--header-insertion=never" },
+				filetypes = { "c", "cpp" },
+			},
+		},
+	},
 	-- {
 	-- 	"neovim/nvim-lspconfig",
 	-- 	opts = {
