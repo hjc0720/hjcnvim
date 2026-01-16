@@ -7,12 +7,6 @@ return {
 			cmake_build_options = { "-j" .. tostring(ncpu) },
 		},
 	},
-	{
-		"nvim-cmp",
-		opts = function(_, opts)
-			table.insert(opts.sorting.comparators, 1, require("clangd_extensions.cmp_scores"))
-		end,
-	},
 	-- {
 	-- 	"neovim/nvim-lspconfig",
 	-- 	opts = {
@@ -72,45 +66,4 @@ return {
 	-- 		},
 	-- 	},
 	-- },
-	{
-		"mfussenegger/nvim-dap",
-		event = "VeryLazy",
-		keys = {
-			-- add a keymap to browshttps://github.com/cmu-db/bustub.gite plhttps://github.com/cmu-db/bustub.gitugin files
-			-- stylua: ignore
-			{
-				"<F5>",
-				function() require("dap").continue() end,
-				desc = "launch/continue gdb",
-			},
-			{
-				"<F10>",
-				function()
-					require("dap").step_over()
-				end,
-				desc = "单步调试",
-			},
-			{
-				"<F11>",
-				function()
-					require("dap").step_into()
-				end,
-				desc = "步入",
-			},
-			{
-				"<S-F11>",
-				function()
-					require("dap").step_out()
-				end,
-				desc = "步出",
-			},
-			{
-				"<C-f5>",
-				function()
-					require("dap").terminate()
-				end,
-				desc = "终止程序",
-			},
-		},
-	},
 }

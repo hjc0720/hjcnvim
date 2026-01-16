@@ -40,4 +40,16 @@ return {
 			vim.g.mkdp_debug = 1
 		end,
 	},
+	{
+		"stevearc/conform.nvim",
+		opts = {
+			formatters = {
+				prettier = {
+					prepend_args = function()
+						return { "--use-tabs", "--tab-width", "4" }
+					end,
+				},
+			},
+		},
+	},
 }
