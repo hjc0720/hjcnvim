@@ -8,7 +8,7 @@ return {
 			hide_during_completion = false,
 		},
 		provider = "deepseek",
-		mode = "legacy", -- Switch from "agentic" to "legacy"
+		mode = "agentic", -- Switch from "agentic" to "legacy"
 		-- DeepSeek 配置
 		providers = {
 			deepseek = {
