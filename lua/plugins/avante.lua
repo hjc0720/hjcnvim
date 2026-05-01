@@ -14,9 +14,12 @@ return {
 			deepseek = {
 				__inherited_from = "openai",
 				api_key_name = "DEEPSEEK_API_KEY",
-				endpoint = "https://api.deepseek.com/v1",
-				model = "deepseek-coder",
+				endpoint = "https://api.deepseek.com",
+				model = "deepseek-v4-pro",
 				timeout = 30000,
+				extra_request_body = {
+					thinking = { type = "disabled" },
+				},
 			},
 		},
 	},

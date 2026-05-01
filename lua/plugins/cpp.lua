@@ -7,15 +7,14 @@ return {
 			cmake_build_options = { "-j" .. tostring(ncpu) },
 		},
 	},
-	{
-		"neovim/nvim-lspconfig",
-		opts = {
-			servers = {
-				cmd = { "clangd", "--header-insertion=never" },
-				filetypes = { "c", "cpp" },
+	-- {
+	-- 	"nvim-cmp",
+	-- 	opts = function(_, opts)
+	-- 		table.insert(opts.sorting.comparators, 1, require("clangd_extensions.cmp_scores"))
+	-- 	end,
+	-- },
 			},
 		},
-	},
 	-- {
 	-- 	"neovim/nvim-lspconfig",
 	-- 	opts = {
