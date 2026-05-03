@@ -13,8 +13,8 @@ return {
 	-- 		table.insert(opts.sorting.comparators, 1, require("clangd_extensions.cmp_scores"))
 	-- 	end,
 	-- },
-			},
-		},
+	--		},
+	--	},
 	-- {
 	-- 	"neovim/nvim-lspconfig",
 	-- 	opts = {
