@@ -3,7 +3,7 @@ return {
 	opts = {
 		-- 自动补全配置
 		behaviour = {
-			auto_suggestions = true,
+			auto_suggestions = false,
 			auto_suggestions_respect_ignore = false,
 		},
 		-- 自动补全专用 provider（flash 模型，响应快）
