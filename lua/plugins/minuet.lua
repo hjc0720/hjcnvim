@@ -4,7 +4,7 @@ return {
 		"milanglacier/minuet-ai.nvim",
 		config = function()
 			require("minuet").setup({
-				notify = "debug",
+	--			notify = "debug",
 				-- 2. 配置 DeepSeek V4 的 Provider
 				provider = "openai_fim_compatible",
 				provider_options = {
