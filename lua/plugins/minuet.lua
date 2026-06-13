@@ -4,7 +4,7 @@ return {
 		"milanglacier/minuet-ai.nvim",
 		config = function()
 			require("minuet").setup({
-	--			notify = "debug",
+				--			notify = "debug",
 				-- 2. 配置 DeepSeek V4 的 Provider
 				provider = "openai_fim_compatible",
 				provider_options = {
@@ -12,7 +12,7 @@ return {
 						api_key = "DEEPSEEK_API_KEY",
 						name = "deepseek",
 						optional = {
-							max_tokens = 256,
+							max_tokens = 384,
 							top_p = 0.9,
 						},
 					},
@@ -43,8 +43,8 @@ return {
 				},
 
 				-- 4. 可选：调整请求性能参数
-				debounce = 200,
-				throttle = 500,
+				debounce = 100, --防抖，延迟debounce才发送请求
+				throttle = 800, -- 两次请求间隔throttle
 			})
 		end,
 	},
