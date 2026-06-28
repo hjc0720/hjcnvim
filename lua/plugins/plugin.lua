@@ -11,7 +11,11 @@ return {
 		"nvim-lualine/lualine.nvim",
 		opts = {
 			sections = {
-				lualine_x = { { "encoding", show_bomb = true }, "fileformat" },
+				lualine_x = {
+					require("plugins.cmake_build_type").lualine_component(),
+					{ "encoding", show_bomb = true },
+					"fileformat",
+				},
 			},
 		},
 	},
