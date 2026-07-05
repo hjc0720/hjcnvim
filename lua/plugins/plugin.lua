@@ -12,7 +12,7 @@ return {
 		opts = {
 			sections = {
 				lualine_x = {
-					require("plugins.cmake_build_type").lualine_component(),
+					require("cmake_build_type").lualine_component(),
 					{ "encoding", show_bomb = true },
 					"fileformat",
 				},
