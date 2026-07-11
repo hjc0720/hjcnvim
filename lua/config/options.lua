@@ -44,3 +44,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		-- 其他缓冲区本地选项...
 	end,
 })
+
+if vim.fn.has("win32") == 1 then
+	vim.g.python3_host_prog = "C:\\Users\\hjc07\\AppData\\Local\\Microsoft\\WindowsApps\\python.exe"
+end
