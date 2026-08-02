@@ -11,6 +11,7 @@ return {
 					openai_fim_compatible = {
 						api_key = "DEEPSEEK_API_KEY",
 						name = "deepseek",
+						model = "deepseek-v4-flash",
 						optional = {
 							max_tokens = 512,
 							top_p = 0.9,
