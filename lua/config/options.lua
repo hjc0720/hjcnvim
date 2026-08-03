@@ -16,6 +16,12 @@ opt.formatoptions:remove("l")
 
 vim.o.clipboard = "unnamedplus"
 
+-- 设置默认终端为 PowerShell
+vim.opt.shell = "powershell"
+vim.opt.shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command"
+vim.opt.shellquote = ""
+vim.opt.shellxquote = ""
+
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*",
 	callback = function(args)
