@@ -32,7 +32,7 @@ template/                 → template.nvim templates (e.g. main.cpp with author
 
 - Tabs everywhere (`expandtab = false`), shiftwidth/tabstop = 4.
 - Relative line numbers are **off** (`relativenumber = false`).
-- Shell is set to PowerShell (`vim.opt.shell = "powershell"`) — this is a Windows-primary setup.
+- Shell is set to Git Bash (`C:\PROGRA~1\Git\bin\bash.exe`) — this is a Windows-primary setup. The 8.3 short path avoids the `Program Files` space-splitting bug; PATH's `bash.exe` is WSL and must not be used here.
 - Clipboard is `unnamedplus` (system clipboard).
 - Custom filetype associations: `.glsl`, `.hlsl`, `.vs`, `.fs`, `.gs`, `.PS`, `.VS` → glsl/hlsl.
 
@@ -50,6 +50,10 @@ template/                 → template.nvim templates (e.g. main.cpp with author
 Language packs: clangd, cmake, git, go, json, markdown, python, tex, vue.
 Also: mini-surround, DAP core.
 
+### C++ / clangd
+
+- Source/Header switching: `<leader>ch` (`ClangdSwitchSourceHeader`) — comes from LazyVim's clangd extra. Do **not** re-add custom `keys` for clangd in `cpp.lua`; a prior override replaced the array and removed this binding.
+
 ### CMake integration
 
 - `cmake-tools.nvim` is configured with parallel build (`-j<ncpu>`).
@@ -62,8 +66,9 @@ Also: mini-surround, DAP core.
 
 ## What not to do
 
-- Don't change shell settings without understanding the Windows/PowerShell dependency in `options.lua`.
+- Don't change shell settings without understanding the Git Bash dependency in `options.lua` — MSBuild keymaps in `keymaps.lua` run via `:!` and rely on bash-style `shellescape` quoting.
 - Don't enable `expandtab` globally — tabs are the intentional default.
 - Don't re-enable `avante.nvim` without checking with the owner — it was deliberately disabled.
 - Don't edit `lazy-lock.json` manually — it's managed by lazy.nvim's update mechanism.
 - Don't remove the GBK encoding detection in `autocmds.lua` — it handles legacy Chinese-encoded files.
+- Don't override `keys` / array-typed fields in LSP `servers.*.opts` unless you re-include the LazyVim extras' entries — lazy.nvim deep-merges arrays by index, so a shorter array silently drops existing keymaps.

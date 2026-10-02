@@ -16,11 +16,13 @@ opt.formatoptions:remove("l")
 
 vim.o.clipboard = "unnamedplus"
 
--- 设置默认终端为 PowerShell
-vim.opt.shell = "powershell"
-vim.opt.shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command"
+-- 设置默认终端为 Git Bash（不用 PATH 里的 bash，那会命中 WSL）
+-- 用 8.3 短路径避免 "Program Files" 空格导致 shell 启动失败
+vim.opt.shell = "C:\\PROGRA~1\\Git\\bin\\bash.exe"
+vim.opt.shellcmdflag = "-c"
 vim.opt.shellquote = ""
 vim.opt.shellxquote = ""
+vim.opt.shellslash = true
 
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*",

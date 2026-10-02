@@ -1,77 +1,73 @@
 local ncpu = #vim.loop.cpu_info()
+local is_win = vim.fn.has("win32") == 1
 
 return {
+	-- clangd 配置
+	{
+		"neovim/nvim-lspconfig",
+		opts = {
+			servers = {
+				clangd = {
+					capabilities = {
+						offsetEncoding = { "utf-16" },
+					},
+					cmd = (function()
+						local args = {
+							"--background-index",
+							"--clang-tidy",
+							"--header-insertion=iwyu",
+							"--completion-style=detailed",
+							"--function-arg-placeholders",
+							"--fallback-style=llvm",
+						}
+						if is_win then
+							table.insert(args, "--pch-storage=memory")
+						end
+						table.insert(args, 1, "clangd")
+						return args
+					end)(),
+					init_options = {
+						usePlaceholders = true,
+						completeUnimported = true,
+						clangdFileStatus = true,
+					},
+				},
+			},
+		},
+	},
+	-- cmake-tools (仅 Linux 使用)
 	{
 		"Civitasv/cmake-tools.nvim",
+		enabled = not is_win,
 		opts = {
 			cmake_build_options = { "-j" .. tostring(ncpu) },
 		},
 	},
-	-- {
-	-- 	"nvim-cmp",
-	-- 	opts = function(_, opts)
-	-- 		table.insert(opts.sorting.comparators, 1, require("clangd_extensions.cmp_scores"))
-	-- 	end,
-	-- },
-	--		},
-	--	},
-	-- {
-	-- 	"neovim/nvim-lspconfig",
-	-- 	opts = {
-	-- 		servers = {
-	-- 			-- Ensure mason installs the server
-	-- 			clangd = {
-	-- 				keys = {
-	-- 					{ "<leader>o", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
-	-- 				},
-	-- 				root_dir = function(fname)
-	-- 					return require("lspconfig.util").root_pattern(
-	-- 						"Makefile",
-	-- 						"configure.ac",
-	-- 						"configure.in",
-	-- 						"config.h.in",
-	-- 						"meson.build",
-	-- 						"meson_options.txt",
-	-- 						"build.ninja"
-	-- 					)(fname) or require("lspconfig.util").root_pattern(
-	-- 						"compile_commands.json",
-	-- 						"compile_flags.txt"
-	-- 					)(fname) or require("lspconfig.util").find_git_ancestor(fname)
-	-- 				end,
-	-- 				capabilities = {
-	-- 					offsetEncoding = { "utf-16" },
-	-- 				},
-	-- 				cmd = {
-	-- 					"clangd",
-	-- 					"--background-index",
-	-- 					"--clang-tidy",
-	-- 					"--header-insertion=iwyu",
-	-- 					"--completion-style=detailed",
-	-- 					"--function-arg-placeholders",
-	-- 					"--fallback-style=llvm",
-	-- 				},
-	-- 				init_options = {
-	-- 					usePlaceholders = true,
-	-- 					completeUnimported = true,
-	-- 					clangdFileStatus = true,
-	-- 				},
-	-- 			},
-	-- 		},
-	-- 		setup = {
-	-- 			clangd = function(_, opts)
-	-- 				local clangd_ext_opts = LazyVim.opts("clangd_extensions.nvim")
-	-- 				require("clangd_extensions").setup(
-	-- 					vim.tbl_deep_extend("force", clangd_ext_opts or {}, { server = opts })
-	-- 				)
-	-- 				return false
-	-- 			end,
-	-- 			on_new_config = function(new_config, new_cmd)
-	-- 				local status, cmake = pcall(require, "cmake-tools")
-	-- 				if status then
-	-- 					cmake.clangd_on_new_config(new_config)
-	-- 				end
-	-- 			end,
-	-- 		},
-	-- 	},
-	-- },
+	-- clangd_extensions
+	{
+		"p00f/clangd_extensions.nvim",
+		opts = {
+			inlay_hints = {
+				inline = false,
+			},
+			ast = {
+				role_icons = {
+					type = "T",
+					declaration = "D",
+					expression = "E",
+					statement = "S",
+					specifier = "V",
+				},
+				kind_icons = {
+					Compound = "C",
+					Recovery = "R",
+					TranslationUnit = "T",
+					PackExpansion = "P",
+					TemplateTypeParm = "T",
+					TemplateTemplateParm = "T",
+					TemplateParamObject = "T",
+				},
+			},
+		},
+	},
 }
