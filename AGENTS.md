@@ -11,7 +11,7 @@ The repo is symlinked to `~/.config/nvim` via `setup.sh` — it is the live conf
 init.lua                  → bootstrap; calls require("config.lazy")
 lua/config/lazy.lua       → lazy.nvim setup; imports LazyVim base + lua/plugins/
 lua/config/options.lua    → vim.opt overrides, conform-on-save autocmd, custom filetypes
-lua/config/autocmds.lua   → autoformat toggle per filetype, GBK encoding detection
+lua/config/autocmds.lua   → autoformat toggle per filetype
 lua/config/keymaps.lua    → extra keymaps (CMake build shortcuts)
 lua/plugins/*.lua         → one file per concern; all returned specs merged by lazy.nvim
 lua/cmake_build_type.lua  → standalone module: lualine component for cmake-tools build type
@@ -70,5 +70,5 @@ Also: mini-surround, DAP core.
 - Don't enable `expandtab` globally — tabs are the intentional default.
 - Don't re-enable `avante.nvim` without checking with the owner — it was deliberately disabled.
 - Don't edit `lazy-lock.json` manually — it's managed by lazy.nvim's update mechanism.
-- Don't remove the GBK encoding detection in `autocmds.lua` — it handles legacy Chinese-encoded files.
+- Encoding detection uses Neovim's built-in `fileencodings` only (in `options.lua`) — no custom GBK/UTF-8 sniffing.
 - Don't override `keys` / array-typed fields in LSP `servers.*.opts` unless you re-include the LazyVim extras' entries — lazy.nvim deep-merges arrays by index, so a shorter array silently drops existing keymaps.
