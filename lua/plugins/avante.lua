@@ -1,5 +1,6 @@
 return {
 	"yetone/avante.nvim",
+	enabled = false,
 	opts = {
 		system_prompt = "你是一个专业的中文AI编程助手。所有回答、代码注释、解释说明都必须使用简体中文。代码中的变量名和函数名可以使用英文，但注释和对话必须用中文。",
 		-- 自动补全配置

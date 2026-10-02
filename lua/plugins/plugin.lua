@@ -1,4 +1,4 @@
-﻿local configPath = function()
+local configPath = function()
 	if vim.fn.has("unix") == 1 then
 		return "~/.config/nvim/"
 	else
@@ -47,10 +47,18 @@ return {
 	{
 		"stevearc/conform.nvim",
 		opts = {
+			formatters_by_ft = {
+				cmake = { "cmake_format" },
+			},
 			formatters = {
 				prettier = {
 					prepend_args = function()
 						return { "--use-tabs", "--tab-width", "4" }
+					end,
+				},
+				cmake_format = {
+					prepend_args = function()
+						return { "--line-width", "120", "--use-tabchars", "--tab-size", "4", "--max-subgroups-hwrap", "99", "--max-pargs-hwrap", "99" }
 					end,
 				},
 			},
