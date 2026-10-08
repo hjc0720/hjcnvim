@@ -16,13 +16,21 @@ opt.formatoptions:remove("l")
 
 vim.o.clipboard = "unnamedplus"
 
--- 设置默认终端为 Git Bash（不用 PATH 里的 bash，那会命中 WSL）
--- 用 8.3 短路径避免 "Program Files" 空格导致 shell 启动失败
-vim.opt.shell = "C:\\PROGRA~1\\Git\\bin\\bash.exe"
-vim.opt.shellcmdflag = "-c"
-vim.opt.shellquote = ""
-vim.opt.shellxquote = ""
-vim.opt.shellslash = true
+-- 终端 shell：Windows 用 Git Bash，Linux 用 bash
+if vim.fn.has("win32") == 1 then
+	-- 不用 PATH 里的 bash，那会命中 WSL
+	-- 用 8.3 短路径避免 "Program Files" 空格导致 shell 启动失败
+	vim.opt.shell = "C:\\PROGRA~1\\Git\\bin\\bash.exe"
+	vim.opt.shellcmdflag = "-c"
+	vim.opt.shellquote = ""
+	vim.opt.shellxquote = ""
+	vim.opt.shellslash = true
+else
+	vim.opt.shell = "bash"
+	vim.opt.shellcmdflag = "-c"
+	vim.opt.shellquote = ""
+	vim.opt.shellxquote = ""
+end
 
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*",

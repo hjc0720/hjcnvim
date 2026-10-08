@@ -1,9 +1,5 @@
 local configPath = function()
-	if vim.fn.has("unix") == 1 then
-		return "~/.config/nvim/"
-	else
-		return "%APPDATA%/nvim/"
-	end
+	return vim.fn.stdpath("config")
 end
 
 return {
@@ -36,6 +32,14 @@ return {
 				email = "hjc@xszn-tech.com",
 			})
 		end,
+	},
+	{
+		"jay-babu/mason-nvim-dap.nvim",
+		opts = {
+			-- 只自动装 codelldb；debugpy 在 Windows 上解析路径异常，需要时再 :Mason 手动装
+			ensure_installed = { "codelldb" },
+			automatic_installation = false,
+		},
 	},
 	{
 		"iamcco/markdown-preview.nvim",

@@ -5,15 +5,18 @@ return {
 		config = function()
 			require("minuet").setup({
 				--			notify = "debug",
-				-- 2. 配置 DeepSeek V4 的 Provider
+				-- 2. 配置 DeepSeek Flash 的 Provider (FIM 补全)
 				provider = "openai_fim_compatible",
+				request_timeout = 3,
 				provider_options = {
 					openai_fim_compatible = {
 						api_key = "DEEPSEEK_API_KEY",
 						name = "deepseek",
 						model = "deepseek-v4-flash",
+						end_point = "https://api.deepseek.com/v1/completions",
+						stream = true,
 						optional = {
-							max_tokens = 512,
+							max_tokens = 256,
 							top_p = 0.9,
 						},
 					},

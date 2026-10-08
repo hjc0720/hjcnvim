@@ -35,10 +35,9 @@ return {
 			},
 		},
 	},
-	-- cmake-tools (仅 Linux 使用)
+	-- cmake-tools
 	{
 		"Civitasv/cmake-tools.nvim",
-		enabled = not is_win,
 		opts = {
 			cmake_build_options = { "-j" .. tostring(ncpu) },
 		},
